@@ -1,0 +1,3 @@
+https://shikiyura.com/2020/06/execute_systemctl_on_wsl2/
+
+

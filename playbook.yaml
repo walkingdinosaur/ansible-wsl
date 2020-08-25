@@ -1,0 +1,24 @@
+- hosts: localhost
+  vars:
+    sample_vars: ansible_test
+  tasks:
+    - shell: uptime
+      register: result
+
+    - debug:
+        msg: "{{ result.stdout }}"
+    
+    - debug:
+        msg: "{{ sample_vars }}"
+
+    - name: "Base packages"
+      apt:
+        pkg:
+          - git
+          - vim
+          - language-pack-ja
+          - fish
+          - docker.io
+          - prometheus-node-exporter
+        state: present
+        update_cache: yes
