@@ -11,6 +11,9 @@
     - debug:
         msg: "{{ sample_vars }}"
 
+    - debug:
+        msg: "{{ ansible_env.PWD }}"
+
     - name: "Base packages"
       apt:
         pkg:
@@ -19,6 +22,22 @@
           - language-pack-ja
           - fish
           - docker.io
+          - gcc
+          - make
+          - golang
           - prometheus-node-exporter
         state: present
         update_cache: yes
+
+    - name: "Install n for nodejs"
+      shell: |
+        sudo apt-get install nodejs npm -y
+        sudo npm install -g n
+        sudo n lts
+        sudo apt-get purge nodejs npm -y
+      register: result_install_n
+
+    - debug:
+        msg: "{{ result_install_n }}"
+
+
